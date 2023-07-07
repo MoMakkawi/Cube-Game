@@ -3,5 +3,6 @@
 
 ## Game Story :
 
-https://github.com/MoMakkawi/Cube-Game/assets/94985793/7f2b4d2e-1e67-4b3c-8c00-b3b63f08bd39
+
+https://github.com/MoMakkawi/Cube-Game/assets/94985793/e3cacc0a-31e5-4296-824e-315d656e6a51
 
