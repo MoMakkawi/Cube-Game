@@ -22,6 +22,7 @@ public class MainMenu : MonoBehaviour
     }
     public static void GameOver()
     {
+        Bullet.EnemyDestroiedNumber = 0;
         SceneManager.LoadSceneAsync(2);
     }
     public static void GameWin()
