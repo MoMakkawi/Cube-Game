@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class CountdownTimer : MonoBehaviour
 {
-    public static float TimeRemaining = 10f; // Set the initial countdown time here.
+    public static float TimeRemaining ; // Set the initial countdown time here.
     public Text timerText;
 
     private void Start()
@@ -11,6 +11,8 @@ public class CountdownTimer : MonoBehaviour
         // Get the Text component from the UI Text object
         if (timerText == null)
             timerText = GetComponent<Text>();
+
+        TimeRemaining = 10f; // Set the initial countdown time he
     }
 
     private void Update()
@@ -23,6 +25,7 @@ public class CountdownTimer : MonoBehaviour
         else
         {
             timerText.text = "Time : End";
+            MainMenu.GameOver();
         }
     }
 
