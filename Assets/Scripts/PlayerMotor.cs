@@ -70,10 +70,12 @@ public class PlayerMotor : MonoBehaviour
 
         playerVelocity.y += gravity + Time.deltaTime;
 
+        if (playerVelocity.y < -200f)
+            MainMenu.GameOver();
+
         if (isGrounded && playerVelocity.y < 0)
-        {
-            playerVelocity.y = -2f;
-        }
+                playerVelocity.y = -2f;
+        
 
         controller.Move(playerVelocity * Time.deltaTime);
         
