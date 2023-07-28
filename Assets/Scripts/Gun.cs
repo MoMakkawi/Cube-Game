@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
     public Transform BulletSpawnPoint;
     public GameObject BulletPerfab;
-    public float BulletSpeed = 30f;
+    public float BulletSpeed = 40f;
     public static float BulletsNumbes;
 
     private void Start()

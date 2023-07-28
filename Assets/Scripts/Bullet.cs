@@ -12,18 +12,19 @@ public class Bullet : MonoBehaviour
     {
         // Get information from the GameObject directly
         string gameObjectName = gameObject.name;
-        if (gameObjectName.Contains("Enemy")) 
+        if (gameObjectName.Contains("Enemy"))
             Destroy(gameObject, life);
     }
     private void OnCollisionEnter(Collision collision)
     {
+        Destroy(gameObject);
+
         // Get information from the GameObject directly
         string gameObjectName = collision.gameObject.name;
 
         if (gameObjectName.Contains("Enemy"))
         {
             Destroy(collision.gameObject);
-            Destroy(gameObject);
 
             EnemyDestroiedNumber++;
             CountdownTimer.SocreNumber = EnemyDestroiedNumber;
