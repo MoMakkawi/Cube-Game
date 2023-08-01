@@ -1,5 +1,5 @@
 # Cube-Game
-3D combat game.
+A three-dimensional combat game, the game is represented by a player in the form of a cube who must pay attention to obstacles while searching the maze for enemies who are also cubes but have a cyan color to shoot them, and the player tries to eliminate a specific number of them to reach a certain score, before time runs out.
 
 ## Game Description :
 ![Cube Game Description](https://github.com/MoMakkawi/Cube-Game/assets/94985793/b8289328-8e2a-401c-a8b0-c9c36aa7792a)
