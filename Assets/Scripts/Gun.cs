@@ -4,41 +4,63 @@ public class Gun : MonoBehaviour
 {
     public Transform BulletSpawnPoint;
     public GameObject BulletPerfab;
-    public float BulletSpeed = 40f;
+
+    public int damage = 10;
+    public float range = 100f;
     public static float BulletsNumbes;
-
+    CountdownTimer countdownTimer;
     public AudioClip bulletSound;
-
+    private AudioSource audioSource;
+    public int playerBulletDamage = 10;
     private void Start()
     {
         BulletsNumbes = 70f;
-        CountdownTimer.BulletRemaining = BulletsNumbes;
 
-        // Get the AudioSource component attached to this GameObject
-        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+        countdownTimer = FindObjectOfType<CountdownTimer>();
 
-        // Assign the bulletSound AudioClip to the AudioSource
         audioSource.clip = bulletSound;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (BulletsNumbes < 0 
-            && CountdownTimer.SocreNumber < Bullet.EnemyNumber)
-            MainMenu.GameOver();
 
-        if(Input.GetMouseButtonDown(0))
+
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            //Shoot();
+            Shoot1();
+        }
+    }
+
+    private void Shoot1()
+    {
+        countdownTimer.ReduceBullet();
+        RaycastHit hit;
+        audioSource.Play();
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
         {
             var bullet = Instantiate(BulletPerfab, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
-            bullet.GetComponent<Rigidbody>().velocity = BulletSpawnPoint.forward * BulletSpeed;
-
-            // If you are instantiating bullets programmatically, play the audio here
-            AudioSource audioSource = GetComponent<AudioSource>();
-            audioSource.Play();
-
-            BulletsNumbes--;
-            CountdownTimer.BulletRemaining = BulletsNumbes;
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            Vector3 direction = BulletSpawnPoint.forward;
+            bullet.GetComponent<Bullet>().SetBulletProb(damage, TargetType.Enemy, direction);
+            bullet.GetComponent<Bullet>().ShootBullet();
         }
+
+    }
+
+    private void Shoot()
+    {
+        var bullet = Instantiate(BulletPerfab, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
+        //BulletSpawnPoint.forward = Camera.main.transform.forward;
+        //bullet.GetComponent<Rigidbody>().velocity = BulletSpawnPoint.forward * BulletSpeed;
+
+        // If you are instantiating bullets programmatically, play the audio here
+
+        audioSource.Play();
+
+        countdownTimer.ReduceBullet();
     }
 }

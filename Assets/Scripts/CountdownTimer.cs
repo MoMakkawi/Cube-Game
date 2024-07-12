@@ -3,34 +3,49 @@ using UnityEngine.UI;
 
 public class CountdownTimer : MonoBehaviour
 {
-    public static float TimeRemaining ; // Set the initial countdown time here.
-    public static float BulletRemaining;
-    public static float SocreNumber;
+    private float _timeRemaining; // Set the initial countdown time here.
+    private float _bulletRemaining;
+    private float _scoreNumber;
 
-    public Text timerText;
-    public Text bulletText;
-    public Text scoreText;
+    [Header("Components")]
+    private Text timerText;
+    private Text bulletText;
+    private Text scoreText;
 
+    private void Awake()
+    {
+
+        timerText = transform.GetChild(0).GetComponent<Text>();
+        bulletText = transform.GetChild(1).GetComponent<Text>();
+        scoreText = transform.GetChild(2).GetComponent<Text>();
+    }
     private void Start()
     {
-        // Get the Text component from the UI Text object
-        if (timerText == null)
-            timerText = GetComponent<Text>();
-        if (bulletText == null)
-            bulletText = GetComponent<Text>();
-
-        TimeRemaining = 40f; // Set the initial countdown time he
-        SocreNumber = 0f;
+        _timeRemaining = 40f;
+        _scoreNumber = 0f;
+        _bulletRemaining = 60;
+        UpdateBulletUI();
+    }
+    public void ReduceBullet()
+    {
+        _bulletRemaining--;
+        UpdateBulletUI();
+        if (_bulletRemaining <= 0)
+        {
+            MainMenu.GameOver();
+        }
+    }
+    private void UpdateBulletUI()
+    {
+        bulletText.text = "Bullet : " + _bulletRemaining.ToString();
     }
 
     private void Update()
     {
-        bulletText.text = "Bullet = " + BulletRemaining.ToString();
-        scoreText.text = "Score = " + SocreNumber.ToString();
 
-        if (TimeRemaining > 0)
+        if (_timeRemaining > 0)
         {
-            TimeRemaining -= Time.deltaTime;
+            _timeRemaining -= Time.deltaTime;
             UpdateTimerDisplay();
         }
         else
@@ -39,12 +54,22 @@ public class CountdownTimer : MonoBehaviour
             MainMenu.GameOver();
         }
     }
+    public void ChangeValueOfScore()
+    {
+        _scoreNumber++;
+        UpdateScoreUI();
+    }
+
+    private void UpdateScoreUI()
+    {
+        scoreText.text = "Score : " + _scoreNumber.ToString();
+    }
 
     private void UpdateTimerDisplay()
     {
-        int minutes = Mathf.FloorToInt(TimeRemaining / 60);
-        int seconds = Mathf.FloorToInt(TimeRemaining % 60);
+        int minutes = Mathf.FloorToInt(_timeRemaining / 60);
+        int seconds = Mathf.FloorToInt(_timeRemaining % 60);
         string timerString = string.Format("Time : {0:00}:{1:00}", minutes, seconds);
-        timerText.text = timerString;
+        timerText.text = timerString.ToString();
     }
 }
