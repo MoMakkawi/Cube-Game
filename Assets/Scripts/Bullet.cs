@@ -5,8 +5,8 @@ public enum TargetType
     Enemy
 }
 public class Bullet : MonoBehaviour
-{   
-    public TargetType owner;
+{
+    private TargetType owner;
     private CountdownTimer countdownTimer;
     private int damage;
     private Vector3 _direction;
@@ -15,9 +15,12 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         countdownTimer = FindObjectOfType<CountdownTimer>();
-        _rigidbodyBullet=GetComponent<Rigidbody>();
+        _rigidbodyBullet = GetComponent<Rigidbody>();
     }
-
+    private void Start()
+    {
+        Destroy(gameObject, 4f);
+    }
     public void SetBulletProb(int damage, TargetType owner, Vector3 direction, float bulletSpeed = 80f)
     {
         _bulletSpeedShoot = bulletSpeed;
@@ -27,24 +30,26 @@ public class Bullet : MonoBehaviour
 
         if (owner == TargetType.Player)
         {
-            
+
             //meshRenderer.material.color = Color.white;
         }
         else
         {
-           
+
             //meshRenderer.material.color = Color.black;
 
         }
 
     }
-    public void ShootBullet()
+    public void ShootBullet(Vector3 direction)
     {
-        _rigidbodyBullet.velocity = _direction * _bulletSpeedShoot;
+        Debug.Log(_direction + "    " + direction);
+        _rigidbodyBullet.velocity = direction * _bulletSpeedShoot;
     }
     void OnCollisionEnter(Collision collision)
     {
-        
+        Debug.Log(collision.gameObject.name);
+
         if (owner == TargetType.Player && collision.gameObject.CompareTag("Player"))
         {
             PlayerHealth playerhealth = collision.gameObject.GetComponent<PlayerHealth>();

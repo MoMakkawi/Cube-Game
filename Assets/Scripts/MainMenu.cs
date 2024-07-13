@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
 #endif
         Application.Quit();
     }
-    public void StartGame()
+    public static void StartGame()
     {
         SceneManager.LoadSceneAsync(1);
     }

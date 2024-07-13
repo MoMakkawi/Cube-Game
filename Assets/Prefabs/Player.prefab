@@ -543,7 +543,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletSpawnPoint: {fileID: 1670151496871252581}
   BulletPerfab: {fileID: 1741456179867899211, guid: b49b1d8080e2106438fcb8d96e8e52b3, type: 3}
-  BulletSpeed: 20
   damage: 10
   range: 100
   bulletSound: {fileID: 8300000, guid: 8401456349c492a489ed90469e317e43, type: 3}

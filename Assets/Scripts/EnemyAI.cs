@@ -41,7 +41,7 @@ public class EnemyAI : MonoBehaviour
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
     }
-
+    
     private void Patroling()
     {
         if (!walkPointSet) SearchWalkPoint();

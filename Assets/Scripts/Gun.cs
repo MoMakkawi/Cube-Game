@@ -40,14 +40,14 @@ public class Gun : MonoBehaviour
         countdownTimer.ReduceBullet();
         RaycastHit hit;
         audioSource.Play();
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
-        {
-            var bullet = Instantiate(BulletPerfab, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
-            Bullet bulletScript = bullet.GetComponent<Bullet>();
-            Vector3 direction = BulletSpawnPoint.forward;
-            bullet.GetComponent<Bullet>().SetBulletProb(damage, TargetType.Enemy, direction);
-            bullet.GetComponent<Bullet>().ShootBullet();
-        }
+        //if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
+        //{
+        var bullet = Instantiate(BulletPerfab, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        Vector3 direction = Camera.main.transform.forward;
+        bullet.GetComponent<Bullet>().SetBulletProb(damage, TargetType.Enemy, direction);
+        bullet.GetComponent<Bullet>().ShootBullet(direction);
+        //}
 
     }
 
