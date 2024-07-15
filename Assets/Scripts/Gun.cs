@@ -7,17 +7,19 @@ public class Gun : MonoBehaviour
 
     public int damage = 10;
     public float range = 100f;
-    public static float BulletsNumbes;
+    public static float BulletsNumbers;
     CountdownTimer countdownTimer;
     public AudioClip bulletSound;
     private AudioSource audioSource;
     public int playerBulletDamage = 10;
+    private PlayerHealth playerHealth;
     private void Start()
     {
-        BulletsNumbes = 70f;
+        BulletsNumbers = 40f;
 
         audioSource = GetComponent<AudioSource>();
         countdownTimer = FindObjectOfType<CountdownTimer>();
+        playerHealth = FindObjectOfType<PlayerHealth>();
 
         audioSource.clip = bulletSound;
     }
@@ -28,26 +30,24 @@ public class Gun : MonoBehaviour
 
 
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetMouseButtonDown(0) && playerHealth != null && !playerHealth.IsDead())
         {
-            //Shoot();
+
             Shoot1();
         }
+
     }
 
     private void Shoot1()
     {
         countdownTimer.ReduceBullet();
-        RaycastHit hit;
         audioSource.Play();
-        //if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
-        //{
         var bullet = Instantiate(BulletPerfab, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         Vector3 direction = Camera.main.transform.forward;
         bullet.GetComponent<Bullet>().SetBulletProb(damage, TargetType.Enemy, direction);
         bullet.GetComponent<Bullet>().ShootBullet(direction);
-        //}
+
 
     }
 

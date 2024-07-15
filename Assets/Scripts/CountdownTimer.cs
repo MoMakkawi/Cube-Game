@@ -21,19 +21,22 @@ public class CountdownTimer : MonoBehaviour
     }
     private void Start()
     {
-        _timeRemaining = 40f;
+        _timeRemaining = 60f;
         _scoreNumber = 0f;
-        _bulletRemaining = 60;
+        _bulletRemaining = 50;
         UpdateBulletUI();
     }
     public void ReduceBullet()
     {
+
         _bulletRemaining--;
         UpdateBulletUI();
         if (_bulletRemaining <= 0)
         {
-            MainMenu.GameOver();
+            PlayerHealth.OnPlayerDeath?.Invoke();
         }
+
+
     }
     private void UpdateBulletUI()
     {
@@ -51,7 +54,7 @@ public class CountdownTimer : MonoBehaviour
         else
         {
             timerText.text = "Time : End";
-            MainMenu.GameOver();
+            PlayerHealth.OnPlayerDeath?.Invoke();
         }
     }
     public void ChangeValueOfScore()

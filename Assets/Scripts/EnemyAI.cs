@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
@@ -6,10 +6,9 @@ public class EnemyAI : MonoBehaviour
     public NavMeshAgent agent;
 
     public Transform player;
+    public Transform firepoint; // نقطة إطلاق الرصاص
 
     public LayerMask whatIsGround, whatIsPlayer;
-
-
 
     //Patroling
     public Vector3 walkPoint;
@@ -29,6 +28,12 @@ public class EnemyAI : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+
+        // تأكد من تعيين firepoint
+        if (firepoint == null)
+        {
+            Debug.LogError("Firepoint is not assigned.");
+        }
     }
 
     private void Update()
@@ -41,7 +46,7 @@ public class EnemyAI : MonoBehaviour
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
     }
-    
+
     private void Patroling()
     {
         if (!walkPointSet) SearchWalkPoint();
@@ -55,6 +60,7 @@ public class EnemyAI : MonoBehaviour
         if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false;
     }
+
     private void SearchWalkPoint()
     {
         //Calculate random point in range
@@ -81,26 +87,22 @@ public class EnemyAI : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            Vector3 direction = new Vector3(transform.position.x + .5f, transform.position.y, transform.position.z);
-            GameObject bullet = Instantiate(projectile, direction, Quaternion.identity);
-            bullet.GetComponent<Bullet>().SetBulletProb(10, TargetType.Player, direction);
+            // إطلاق الرصاصة من firepoint بدلاً من جسم العدو
+            GameObject bullet = Instantiate(projectile, firepoint.position, firepoint.rotation);
+            bullet.GetComponent<Bullet>().SetBulletProb(10, TargetType.Player, firepoint.forward);
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             rb.velocity = Vector3.zero;
-            Vector3 directionPlayer = (player.position - transform.position).normalized;
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            //rb.AddForce(transform.up * 8f, ForceMode.Impulse);
-
+            rb.AddForce(firepoint.forward * 32f, ForceMode.Impulse);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
+
     private void ResetAttack()
     {
         alreadyAttacked = false;
     }
-
-
 
     private void OnDrawGizmosSelected()
     {
@@ -108,5 +110,10 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+
     }
 }

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &144593936289455371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8285215756387636667}
+  m_Layer: 6
+  m_Name: FireEnemyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8285215756387636667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144593936289455371}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.786}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 63610278223391951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &876728364072936988
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +224,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -255,6 +286,7 @@ GameObject:
   - component: {fileID: 2893492106490714592}
   - component: {fileID: 4603762324718405226}
   - component: {fileID: 7311760662278569085}
+  - component: {fileID: 3785903633519691509}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -278,6 +310,7 @@ Transform:
   - {fileID: 8829935072047740592}
   - {fileID: 4341629114837189487}
   - {fileID: 8725394152305776744}
+  - {fileID: 8285215756387636667}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4015051750513639149
@@ -349,8 +382,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.32, y: 1.5586947, z: 1.67}
+  m_Center: {x: 0.0000000014843555, y: 0.27934673, z: 5.0741786e-11}
 --- !u!95 &8513284686448043666
 Animator:
   serializedVersion: 5
@@ -395,7 +428,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -413,6 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 4603762324718405226}
   player: {fileID: 0}
+  firepoint: {fileID: 8285215756387636667}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 512
@@ -422,7 +456,7 @@ MonoBehaviour:
   walkPoint: {x: 2, y: 0, z: 0}
   walkPointRange: 5
   timeBetweenAttacks: 3
-  projectile: {fileID: 1741456179867899211, guid: b49b1d8080e2106438fcb8d96e8e52b3, type: 3}
+  projectile: {fileID: 1741456179867899211, guid: 2dc4ace824c498041a74972d6104c3d1, type: 3}
   sightRange: 12.6
   attackRange: 9.6
   playerInSightRange: 0
@@ -463,6 +497,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   healthBarImage: {fileID: 4484292930595105535}
+--- !u!114 &3785903633519691509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4181534674351003343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411060de4483b5e4c9847cd3cbc18554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColor: {r: 0.27525544, g: 1, b: 0, a: 1}
+  needBoxIndicator: 1
+  needArrowIndicator: 1
+  needDistanceText: 1
+  indicator: {fileID: 0}
 --- !u!1 &4914813180050303470
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0.15548967, b: 0.40880513, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

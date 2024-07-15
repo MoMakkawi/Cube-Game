@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
+        Debug.Log(collision.gameObject.name + "  " + owner);
 
         if (owner == TargetType.Player && collision.gameObject.CompareTag("Player"))
         {

@@ -1,30 +1,60 @@
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
+
     public void ExitGame()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-#endif
+#else
         Application.Quit();
+#endif
     }
-    public static void StartGame()
+
+    public void StartGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadScene("Trillere Scene");
     }
+
     public void VisitUs()
     {
         Application.OpenURL("https://github.com/MoMakkawi/Cube-Game");
     }
-    public static void GameOver()
-    {
 
-        SceneManager.LoadSceneAsync(2);
-    }
-    public static void GameWin()
+    public void ResetGame()
     {
-        SceneManager.LoadSceneAsync(3);
+        StartCoroutine(ResetGameRoutine());
+    }
+    public void PlayGamePlay()
+    {
+        SceneManager.LoadScene("GamePlay");
+    }
+    private IEnumerator ResetGameRoutine()
+    {
+        // Load the scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        // Wait for the end of the frame to ensure the scene is loaded
+        yield return new WaitForEndOfFrame();
+
+        // Ensure time scale is reset
+        Time.timeScale = 1;
+
+        // Call the game manager reset function
+        gameManager.ResetGameManager();
+    }
+
+    public void GameWin()
+    {
+        SceneManager.LoadScene("Game Win");
     }
 }

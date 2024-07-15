@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -8,8 +9,8 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     private int currentHealth;
     public Image healthBarImage;
-
-
+    public bool isDead = false;
+    public static Action OnPlayerDeath;
     void Start()
     {
         currentHealth = maxHealth;
@@ -41,8 +42,15 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
+        Time.timeScale = 0;
+        isDead = true;
+        OnPlayerDeath?.Invoke();
         Debug.Log("Player Died!");
-        Destroy(gameObject);
-        // تنفيذ منطق موت اللاعب
+        //Destroy(gameObject);
+
+    }
+    public bool IsDead()
+    {
+        return isDead;
     }
 }
