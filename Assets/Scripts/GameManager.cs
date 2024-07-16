@@ -6,8 +6,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject diePanel;
     PlayerHealth health;
     private int enemyCount;
+    CountdownTimer countdownTimer;
     void Start()
     {
+        countdownTimer = FindObjectOfType<CountdownTimer>();
         enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         health = FindObjectOfType<PlayerHealth>();
         diePanel.SetActive(false); // تأكد من إخفاء لوحة الموت عند بدء اللعبة
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
     public void OnEnemyKilled()
     {
         enemyCount--;
+        countdownTimer.ChangeValueOfScore();
         Debug.Log("Enemy killed, remaining: " + enemyCount);
 
         if (enemyCount <= 0)
