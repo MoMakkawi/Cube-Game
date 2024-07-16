@@ -15,7 +15,7 @@ public class Gun : MonoBehaviour
     private PlayerHealth playerHealth;
     private void Start()
     {
-        BulletsNumbers = 40f;
+        BulletsNumbers = 60f;
 
         audioSource = GetComponent<AudioSource>();
         countdownTimer = FindObjectOfType<CountdownTimer>();

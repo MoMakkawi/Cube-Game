@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     {
         countdownTimer = FindObjectOfType<CountdownTimer>();
         enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        print(enemyCount);
         health = FindObjectOfType<PlayerHealth>();
         diePanel.SetActive(false); // تأكد من إخفاء لوحة الموت عند بدء اللعبة
     }
@@ -42,8 +43,9 @@ public class GameManager : MonoBehaviour
     {
         enemyCount--;
         countdownTimer.ChangeValueOfScore();
-        Debug.Log("Enemy killed, remaining: " + enemyCount);
 
+        Debug.Log("Enemy killed, remaining: " + enemyCount);
+        Debug.Log(enemyCount.ToString());
         if (enemyCount <= 0)
         {
             GameWin();

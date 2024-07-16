@@ -23,7 +23,7 @@ public class CountdownTimer : MonoBehaviour
     {
         _timeRemaining = 60f;
         _scoreNumber = 0f;
-        _bulletRemaining = 50;
+        _bulletRemaining = 60;
         UpdateBulletUI();
     }
     public void ReduceBullet()

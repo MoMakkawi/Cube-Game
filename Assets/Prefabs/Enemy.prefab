@@ -456,10 +456,10 @@ MonoBehaviour:
     m_Bits: 8
   walkPoint: {x: 2, y: 0, z: 0}
   walkPointRange: 5
-  timeBetweenAttacks: 3
+  timeBetweenAttacks: 1.8
   projectile: {fileID: 1741456179867899211, guid: 2dc4ace824c498041a74972d6104c3d1, type: 3}
-  sightRange: 25.3
-  attackRange: 18
+  sightRange: 32.1
+  attackRange: 21.5
   playerInSightRange: 0
   playerInAttackRange: 0
 --- !u!195 &4603762324718405226
