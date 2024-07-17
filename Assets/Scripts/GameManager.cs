@@ -7,8 +7,10 @@ public class GameManager : MonoBehaviour
     PlayerHealth health;
     private int enemyCount;
     CountdownTimer countdownTimer;
+    Gun gun;
     void Start()
     {
+        gun = FindObjectOfType<Gun>();
         countdownTimer = FindObjectOfType<CountdownTimer>();
         enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         print(enemyCount);
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     void HandlePlayerDeath()
     {
+        health.isDead = true;
         Debug.Log("Game Manager: Player has died. Handle accordingly.");
         diePanel.SetActive(true);
         Time.timeScale = 0;
@@ -44,8 +47,7 @@ public class GameManager : MonoBehaviour
         enemyCount--;
         countdownTimer.ChangeValueOfScore();
 
-        Debug.Log("Enemy killed, remaining: " + enemyCount);
-        Debug.Log(enemyCount.ToString());
+
         if (enemyCount <= 0)
         {
             GameWin();

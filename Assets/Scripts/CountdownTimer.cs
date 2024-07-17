@@ -21,9 +21,9 @@ public class CountdownTimer : MonoBehaviour
     }
     private void Start()
     {
-        _timeRemaining = 60f;
+        _timeRemaining = 70f;
         _scoreNumber = 0f;
-        _bulletRemaining = 60;
+        _bulletRemaining = 68;
         UpdateBulletUI();
     }
     public void ReduceBullet()

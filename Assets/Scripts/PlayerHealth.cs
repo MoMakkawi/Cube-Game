@@ -40,13 +40,12 @@ public class PlayerHealth : MonoBehaviour
         healthBarImage.fillAmount = (float)currentHealth / maxHealth;
     }
 
-    void Die()
+    public void Die()
     {
         Time.timeScale = 0;
         isDead = true;
         OnPlayerDeath?.Invoke();
-        Debug.Log("Player Died!");
-        //Destroy(gameObject);
+
 
     }
     public bool IsDead()

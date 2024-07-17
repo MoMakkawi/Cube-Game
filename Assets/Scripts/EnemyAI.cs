@@ -83,7 +83,12 @@ public class EnemyAI : MonoBehaviour
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
 
-        transform.LookAt(player);
+        // الحفاظ على ارتفاع العدو ثابت عند النظر إلى اللاعب
+        Vector3 lookPosition = new Vector3(player.position.x, transform.position.y, player.position.z);
+        transform.LookAt(lookPosition);
+
+        // تدوير firepoint للنظر إلى اللاعب مع تجاهل المحور Y
+        firepoint.LookAt(player);
 
         if (!alreadyAttacked)
         {
@@ -98,6 +103,8 @@ public class EnemyAI : MonoBehaviour
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
+
+
 
     private void ResetAttack()
     {
