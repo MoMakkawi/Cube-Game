@@ -7,8 +7,12 @@ public class EnemyHealth : MonoBehaviour
     private int currentHealth;
     public Image healthBarImage;
     GameManager gameManager;
+    enemydie enemydie1;
+
+
     void Start()
     {
+        enemydie1 = transform.parent.gameObject.GetComponent<enemydie>();
         currentHealth = maxHealth;
         UpdateHealthBar();
         gameManager = FindObjectOfType<GameManager>();
@@ -32,9 +36,10 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
+        enemydie1.breakblock();
         gameManager.OnEnemyKilled();
         Debug.Log("Enemy Died!");
-        // تنفيذ منطق موت العدو
-        Destroy(gameObject); // تدمير العدو بعد موته
+
     }
+
 }
