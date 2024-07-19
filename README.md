@@ -19,7 +19,7 @@ https://github.com/MoMakkawi/Cube-Game/assets/94985793/54962723-90e6-4d79-89ea-d
 ![Top Prespective](https://github.com/MoMakkawi/Cube-Game/assets/94985793/0acafd7d-ec88-4eb0-b4e2-40d9a34a3485)
 
 ## Contributors:
-![Eng. Mostafa Faris](https://github.com/mu20-f) Contributions: 
+[Eng. Mostafa Faris](https://github.com/mu20-f) Contributions: 
   - Code maintenance
   - Add a map
   - Improved weapon appearance
