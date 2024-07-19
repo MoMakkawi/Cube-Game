@@ -16,7 +16,7 @@ https://github.com/MoMakkawi/Cube-Game/assets/94985793/54962723-90e6-4d79-89ea-d
 ![Win UI](https://github.com/MoMakkawi/Cube-Game/assets/94985793/aa2a0f83-cfff-411e-8d7a-0b1ccb39725d)
 
 ## Top Perspective :
-![Top Prespective](https://github.com/MoMakkawi/Cube-Game/assets/94985793/0acafd7d-ec88-4eb0-b4e2-40d9a34a3485)
+![Top Prespective](https://github.com/user-attachments/assets/f678f9e3-059b-431f-b0c3-d92905a51545)
 
 ## Contributors:
 [Eng. Mostafa Faris](https://github.com/mu20-f) Contributions: 
