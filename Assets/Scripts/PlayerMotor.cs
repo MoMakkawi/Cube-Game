@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class PlayerMotor : MonoBehaviour
 {
@@ -18,6 +14,7 @@ public class PlayerMotor : MonoBehaviour
     private bool sprinting;
 
     public float crouchTimer = 1;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +36,7 @@ public class PlayerMotor : MonoBehaviour
             if (crouching) controller.height = Mathf.Lerp(controller.height, 1, p);
             else controller.height = Mathf.Lerp(controller.height, 2, p);
 
-            if(p > 1)
+            if (p > 1)
             {
                 lerpCrouch = false;
                 crouchTimer = 0f;
@@ -70,15 +67,17 @@ public class PlayerMotor : MonoBehaviour
 
         playerVelocity.y += gravity + Time.deltaTime;
 
-        if (playerVelocity.y < -200f)
-            MainMenu.GameOver();
+        //if (playerVelocity.y < -150f)
+        //{ 
+        //die
+        //}
 
         if (isGrounded && playerVelocity.y < 0)
-                playerVelocity.y = -2f;
-        
+            playerVelocity.y = -2f;
+
 
         controller.Move(playerVelocity * Time.deltaTime);
-        
+
 
     }
 

@@ -1,37 +1,78 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
+public enum TargetType
+{
+    Player,
+    Enemy
+}
 public class Bullet : MonoBehaviour
 {
-    public const float EnemyNumber = 4;
-    public static float EnemyDestroiedNumber = 0;
-
-    public float life = 3f;
+    private TargetType owner;
+    private CountdownTimer countdownTimer;
+    private int damage;
+    private Vector3 _direction;
+    [SerializeField] private float _bulletSpeedShoot;
+    private Rigidbody _rigidbodyBullet;
     private void Awake()
     {
-        // Get information from the GameObject directly
-        string gameObjectName = gameObject.name;
-        if (gameObjectName.Contains("Enemy"))
-            Destroy(gameObject, life);
+        countdownTimer = FindObjectOfType<CountdownTimer>();
+        _rigidbodyBullet = GetComponent<Rigidbody>();
     }
-    private void OnCollisionEnter(Collision collision)
+    private void Start()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 4f);
+    }
+    public void SetBulletProb(int damage, TargetType owner, Vector3 direction, float bulletSpeed = 80f)
+    {
+        _bulletSpeedShoot = bulletSpeed;
+        this.damage = damage;
+        this.owner = owner;
+        _direction = direction;
 
-        // Get information from the GameObject directly
-        string gameObjectName = collision.gameObject.name;
-
-        if (gameObjectName.Contains("Enemy"))
+        if (owner == TargetType.Player)
         {
-            Destroy(collision.gameObject);
 
-            EnemyDestroiedNumber++;
-            CountdownTimer.SocreNumber = EnemyDestroiedNumber;
+            //meshRenderer.material.color = Color.white;
+        }
+        else
+        {
 
-            if (CountdownTimer.SocreNumber == EnemyNumber)
-                MainMenu.GameWin();
+            //meshRenderer.material.color = Color.black;
+
         }
 
     }
+    public void ShootBullet(Vector3 direction)
+    {
+        Debug.Log(_direction + "    " + direction);
+        _rigidbodyBullet.velocity = direction * _bulletSpeedShoot;
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name + "  " + owner);
+
+        if (owner == TargetType.Player && collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHealth playerhealth = collision.gameObject.GetComponent<PlayerHealth>();
+            if (playerhealth != null)
+            {
+
+                playerhealth.TakeDamage(damage);
+                Destroy(gameObject);
+            }
+        }
+        else if (owner == TargetType.Enemy && collision.gameObject.CompareTag("Enemy"))
+        {
+            EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(damage);
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }
