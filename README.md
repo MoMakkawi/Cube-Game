@@ -5,7 +5,8 @@ A prototype of a three-dimensional combat game, the game is represented by a pla
 ![Cube Game Description](https://github.com/MoMakkawi/Cube-Game/assets/94985793/b8289328-8e2a-401c-a8b0-c9c36aa7792a)
 
 ## Game Story :
-https://github.com/user-attachments/assets/808b1e6e-3775-4514-998d-fdd2226ec95a
+https://github.com/user-attachments/assets/e6370120-e6de-4d29-bef5-c158abff2884
+
 
 ## The Game :
 https://github.com/MoMakkawi/Cube-Game/assets/94985793/54962723-90e6-4d79-89ea-de95f41d764d
